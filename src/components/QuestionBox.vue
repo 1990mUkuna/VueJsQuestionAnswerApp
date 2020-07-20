@@ -5,7 +5,9 @@
                {{currentQuestion.question}}
                </template> 
                <hr class="my-4"> 
-               
+               <b-list-group>
+                    <b-list-group-item>Cras justo odio</b-list-group-item>
+                </b-list-group>    
                <p v-for="(answer, index) in answers" :key="index">
                   {{ answer }} 
                </p> 
