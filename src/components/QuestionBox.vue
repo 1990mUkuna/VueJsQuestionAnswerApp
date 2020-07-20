@@ -9,6 +9,7 @@
                     <b-list-group-item
                     v-for="(answer, index) in answers"
                     :key="index"
+                    @click="selectAnswer(index)"
                     >
                     {{ answer }}
                     </b-list-group-item>
@@ -30,12 +31,39 @@ export default{
          currentQuestion: Object,
          next: Function
     },
+    //function
+    data(){
+        return {
+           selectedIndex: null  
+        } 
+    },
     computed: {
        answers(){
          let answers = [...this.currentQuestion.incorrect_answers]  
          answers.push(this.currentQuestion.correct_answer)
          return answers  
        }  
-    } 
+    },
+    methods: {
+      selectAnswer(index) {
+           this.selectedIndex = index
+            
+      }
+    }
+
 }
 </script>
+
+<style scoped>
+.list-group{
+     margin-bottom: 15px;
+
+}
+.list-group-item:hover{
+     background: darkorange;
+
+}
+.btn {
+     margin: 0 5px;
+}
+</style>
