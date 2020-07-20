@@ -6,11 +6,14 @@
                </template> 
                <hr class="my-4"> 
                <b-list-group>
-                    <b-list-group-item>Cras justo odio</b-list-group-item>
+                    <b-list-group-item
+                    v-for="(answer, index) in answers"
+                    :key="index"
+                    >
+                    {{ answer }}
+                    </b-list-group-item>
                 </b-list-group>    
-               <p v-for="(answer, index) in answers" :key="index">
-                  {{ answer }} 
-               </p> 
+               
                <b-button variant="primary" href="#">Submit</b-button>
                <b-button @click="next" variant="success" href="#">Next
 
