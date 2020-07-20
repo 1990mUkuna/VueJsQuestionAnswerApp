@@ -5,7 +5,9 @@
       <b-row>
         <b-col sm="6" offset="3">
              <QuestionBox 
+              v-f="questions.length" 
               :currentQuestion="questions[index]"
+              :next="next"
               /> 
         </b-col> 
       </b-row>
@@ -28,6 +30,12 @@ export default {
        questions: [],
        index: 0
     }
+  },
+  // Methods to increment index value, in order to navigate through questions
+  methods:{
+  next() {
+    this.index++
+  }
   },
   mounted: function(){
     // mounted hook used lifecycle hook in vue, Vue calls the mounted() hook when component is added to the DOM
