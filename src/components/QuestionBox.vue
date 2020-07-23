@@ -16,7 +16,10 @@
                     </b-list-group-item>
                 </b-list-group>    
                
-               <b-button variant="primary" href="#">Submit</b-button>
+               <b-button 
+               variant="primary" 
+               @click="submitAnswer"
+               >Submit</b-button>
                <b-button @click="next" variant="success" href="#">Next
 
                </b-button> 
@@ -25,19 +28,21 @@
 </template>
 
 <script>
- 
+/*  import _ from 'lodash' */
 //object
 export default{
      // In order to display current Question you have to refference it in Pops Object
     props: {
          currentQuestion: Object,
-         next: Function
+         next: Function,
+         increment: Function
     },
     //function
     data(){
         return {
            selectedIndex: null,
-            shuffleAnswers: [],
+            /* shuffleAnswers: [], */
+            
              
 
         } 
@@ -53,16 +58,45 @@ export default{
     watch: {
          currentQuestion(){
              this.selectedIndex = null
-             this.shuffleAnswers()
+             /* this.shuffleAnswers() */
          } 
     },
     methods: {
       selectAnswer(index) {
            this.selectedIndex = index 
       },
-      shuffleAnswers() {
-         let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]  
+      submitAnswer(){
+         let isCorrect = false
+          
+         if(this.selectedIndex === this.correctIndex)
+         {
+              isCorrect = true
+         }
+
+         this.increment(isCorrect)
       }
+     /*  shuffleAnswers() {
+         let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]
+          shuffle(answers)  
+      },  
+      shuffle(array){
+          var currentIndex = array.length, temporaryValue, randomIndex;
+
+          //The remain element to shoufle
+          while(0 !== currentIndex)
+          {
+               //Pick a remain element 
+               randomIndex = Math.floor(Math.random() * currentIndex);
+               currentIndex -= 1;
+
+               // swap with current element.
+               temporaryValue = array[currentIndex];
+               array[currentIndex] = array[randomIndex];
+               array[randomIndex] = temporaryValue;
+          }
+          return array;
+     } */
+      
       
     }
   
