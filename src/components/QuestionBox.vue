@@ -10,6 +10,7 @@
                     v-for="(answer, index) in answers"
                     :key="index"
                     @click="selectAnswer(index)"
+                    :class="[selectedIndex === index ? 'selected': '']" 
                     >
                     {{ answer }}
                     </b-list-group-item>
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+ 
 //object
 export default{
      // In order to display current Question you have to refference it in Pops Object
@@ -34,7 +36,10 @@ export default{
     //function
     data(){
         return {
-           selectedIndex: null  
+           selectedIndex: null,
+            shuffleAnswers: [],
+             
+
         } 
     },
     computed: {
@@ -44,12 +49,23 @@ export default{
          return answers  
        }  
     },
+    // To shufle the answer Methods
+    watch: {
+         currentQuestion(){
+             this.selectedIndex = null
+             this.shuffleAnswers()
+         } 
+    },
     methods: {
       selectAnswer(index) {
-           this.selectedIndex = index
-            
+           this.selectedIndex = index 
+      },
+      shuffleAnswers() {
+         let answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer]  
       }
+      
     }
+  
 
 }
 </script>
@@ -61,9 +77,19 @@ export default{
 }
 .list-group-item:hover{
      background: darkorange;
+     cursor: pointer;
 
 }
 .btn {
      margin: 0 5px;
+}
+.selected{
+     background-color: lightseagreen;
+}
+.correct {
+     background-color:forestgreen;
+}
+.incorrect{
+     background-color: red;
 }
 </style>
